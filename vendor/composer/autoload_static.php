@@ -6,60 +6,9 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitb6717e1eb4088c46c9c1bfc3e1080f26
 {
-    public static $files = array (
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-    );
-
-    public static $prefixLengthsPsr4 = array (
-        'W' => 
-        array (
-            'Webmozart\\PathUtil\\' => 19,
-            'Webmozart\\Json\\' => 15,
-            'Webmozart\\Assert\\' => 17,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Ctype\\' => 23,
-            'Seld\\JsonLint\\' => 14,
-        ),
-        'J' => 
-        array (
-            'JsonSchema\\' => 11,
-        ),
-    );
-
-    public static $prefixDirsPsr4 = array (
-        'Webmozart\\PathUtil\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/path-util/src',
-        ),
-        'Webmozart\\Json\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/json/src',
-        ),
-        'Webmozart\\Assert\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webmozart/assert/src',
-        ),
-        'Symfony\\Polyfill\\Ctype\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
-        ),
-        'Seld\\JsonLint\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/seld/jsonlint/src/Seld/JsonLint',
-        ),
-        'JsonSchema\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
-        ),
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb6717e1eb4088c46c9c1bfc3e1080f26::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb6717e1eb4088c46c9c1bfc3e1080f26::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }
