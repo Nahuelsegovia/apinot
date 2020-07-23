@@ -1,13 +1,4 @@
 <?php 
-if($_SERVER['REQUEST_METHOD'] == 'GET'){
-    http_response_code(200);
-}
-
-else{
-    http_response_code(405);
-}
-
-
 
 class Publicacion{
     private $titulo;
@@ -66,6 +57,14 @@ class Usuario{
         $clave = $this->clave;
         $mysqli = $this->mysqli;
         $mysqli->query(" INSERT INTO usuarios(nombre, apellido, correo, clave, id) VALUES('$nombre', '$apellido', '$correo', '$clave', id)");
+        $dataJson = array(
+            "nombre" => $nombre,
+            "apellido" => $apellido,
+            "correo" => $correo,
+            "clave" => $clave,
+            );
+        
+        echo json_encode($dataJson);
     }
 
     public function verUsuarios(){

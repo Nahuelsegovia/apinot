@@ -6,9 +6,35 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitb6717e1eb4088c46c9c1bfc3e1080f26
 {
+    public static $prefixLengthsPsr4 = array (
+        'B' => 
+        array (
+            'Bayfront\\Utilities\\Validator\\' => 29,
+            'Bayfront\\Utilities\\HttpRequest\\' => 31,
+            'Bayfront\\Utilities\\ArrayHelpers\\' => 32,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Bayfront\\Utilities\\Validator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bayfrontmedia/php-validator/src',
+        ),
+        'Bayfront\\Utilities\\HttpRequest\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bayfrontmedia/php-http-request/src',
+        ),
+        'Bayfront\\Utilities\\ArrayHelpers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bayfrontmedia/php-array-helpers/src',
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb6717e1eb4088c46c9c1bfc3e1080f26::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb6717e1eb4088c46c9c1bfc3e1080f26::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

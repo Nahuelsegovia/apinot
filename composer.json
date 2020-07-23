@@ -1,4 +1,5 @@
 {
     "require": {
+        "bayfrontmedia/php-http-request": "^1.0"
     }
 }

@@ -6,4 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Bayfront\\Utilities\\Validator\\' => array($vendorDir . '/bayfrontmedia/php-validator/src'),
+    'Bayfront\\Utilities\\HttpRequest\\' => array($vendorDir . '/bayfrontmedia/php-http-request/src'),
+    'Bayfront\\Utilities\\ArrayHelpers\\' => array($vendorDir . '/bayfrontmedia/php-array-helpers/src'),
 );
