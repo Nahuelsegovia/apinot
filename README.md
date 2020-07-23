@@ -46,7 +46,7 @@ Para crear notas nos dirigimos a /api/notas/crear y a través de request envíam
 * 0.0.2
     * ADD: Podemos crear usuarios a través de la api, también mostramos en json el usuario creado
     * ADD: Utilizamos el paquete Bayfront para procesar las peticiones http
-* 0.0.2
+* 0.0.3
     * Work in progress
 
 ## Autor
