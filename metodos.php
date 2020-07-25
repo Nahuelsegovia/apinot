@@ -25,11 +25,16 @@ class Publicacion{
     }
 
     public function verPublicaciones(){
+        $titulo = $this->titulo;
+        $contenido = $this->contenido;
+        $imagen = $this->imagen;
+        $fecha = $this->fecha;
         $mysqli = $this->mysqli;
-        $usuarios = $mysqli->query("SELECT * FROM publicacion");
-        while($usuario = $usuarios->fetch_assoc()){
-            echo $usuario['titulo'];
-            echo '<br>';
+        $publicaciones = $mysqli->query("SELECT * FROM publicacion");
+        while($publicacion = $publicaciones->fetch_assoc()){
+            $dataJson = array();
+            $dataJson = $publicacion;
+            echo json_encode($dataJson, JSON_UNESCAPED_UNICODE); //Devuelve json y decodifica utf-8
         }
     }
 }
@@ -73,7 +78,7 @@ class Usuario{
         while($usuario = $usuarios->fetch_assoc()){
             $array = array();
             $array = $usuario;
-            echo json_encode($array);
+            echo json_encode($array,JSON_UNESCAPED_UNICODE); //Devuelve json y decodifica utf-8
         }
     }
 
