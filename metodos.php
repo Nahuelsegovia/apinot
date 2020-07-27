@@ -1,5 +1,5 @@
 <?php 
-
+header('Content-type: application/json');
 class Publicacion{
     public $titulo;
     public $contenido;
@@ -40,12 +40,12 @@ class Publicacion{
         $imagen = $this->imagen;
         $fecha = $this->fecha;
         $mysqli = $this->mysqli;
+        $mostrarPublicaciones = array();
         $publicaciones = $mysqli->query("SELECT * FROM publicacion");
         while($publicacion = $publicaciones->fetch_assoc()){
-            $dataJson = array();
-            $dataJson = $publicacion;
-            echo json_encode($dataJson, JSON_UNESCAPED_UNICODE); //Devuelve json y decodifica utf-8
+            $mostrarPublicaciones[] = $publicacion;
         }
+        echo json_encode($mostrarPublicaciones, JSON_UNESCAPED_UNICODE); //Devuelve json y decodifica utf-8
     }
 }
 
@@ -87,11 +87,12 @@ class Usuario{
     public function verUsuarios(){
         $mysqli = $this->mysqli;
         $usuarios = $mysqli->query("SELECT * FROM usuarios");
+        $mostrarUsuarios = array();
         while($usuario = $usuarios->fetch_assoc()){
-            $array = array();
-            $array = $usuario;
-            echo json_encode($array,JSON_UNESCAPED_UNICODE); //Devuelve json y decodifica utf-8
+            $mostrarUsuarios[] = $usuario;
         }
+
+        echo json_encode($mostrarUsuarios,JSON_UNESCAPED_UNICODE); //Devuelve json y decodifica utf-8
     }
 
     public function comprobarUsuario($correo, $clave){
