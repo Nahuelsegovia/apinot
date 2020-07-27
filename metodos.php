@@ -1,11 +1,11 @@
 <?php 
 
 class Publicacion{
-    private $titulo;
-    private $contenido;
-    private $imagen;
-    private $fecha;
-    private $mysqli;
+    public $titulo;
+    public $contenido;
+    public $imagen;
+    public $fecha;
+    public $mysqli;
 
     public function __construct($titulo, $contenido, $imagen, $fecha){
         $this->mysqli = new mysqli('localhost', 'root', 'root', 'apitesting');
@@ -21,7 +21,17 @@ class Publicacion{
         $contenido = $this->contenido;
         $imagen = $this->imagen;
         $fecha = $this->fecha;
-        $mysqli->query("INSERT INTO publicacion (titulo, contenido, imagen, fecha, id) VALUES('$titulo', '$contenido', '$imagen', '$fecha', id) ");
+        $crearPublicacion = $mysqli->prepare("INSERT INTO publicacion(titulo, contenido, imagen, fecha, id_usuario, id) VALUES(?, ?, ?, ?, 1, id)");
+        $crearPublicacion->bind_param("ssss", $titulo, $contenido, $imagen, $fecha);
+        $crearPublicacion->execute();
+        $dataJson = array(
+            "titulo" => $titulo,
+            "contenido" => $contenido,
+            "imagen" => $imagen,
+            "fecha" => $fecha,
+            );
+        
+        echo json_encode($dataJson, JSON_UNESCAPED_UNICODE);
     }
 
     public function verPublicaciones(){
@@ -61,7 +71,9 @@ class Usuario{
         $correo = $this->correo;
         $clave = $this->clave;
         $mysqli = $this->mysqli;
-        $mysqli->query(" INSERT INTO usuarios(nombre, apellido, correo, clave, id) VALUES('$nombre', '$apellido', '$correo', '$clave', id)");
+        $crearUsuario = $mysqli->prepare(" INSERT INTO usuarios(nombre, apellido, correo, clave, id) VALUES(?, ?, ?, ?, id)");
+        $crearUsuario->bind_param("ssss", $nombre, $apellido, $correo, $clave);
+        $crearUsuario->execute();
         $dataJson = array(
             "nombre" => $nombre,
             "apellido" => $apellido,
@@ -69,7 +81,7 @@ class Usuario{
             "clave" => $clave,
             );
         
-        echo json_encode($dataJson);
+        echo json_encode($dataJson, JSON_UNESCAPED_UNICODE);
     }
 
     public function verUsuarios(){
@@ -82,6 +94,31 @@ class Usuario{
         }
     }
 
+    public function comprobarUsuario($correo, $clave){
+        $mysqli = $this->mysqli;
+        $comprobarUsuario = $mysqli->prepare("SELECT * FROM usuarios WHERE correo = ? or clave = ?");
+        $comprobarUsuario->bind_param('ss', $correo, $clave);
+        $comprobarUsuario->execute();
+        $resultado = $comprobarUsuario->get_result();
+        $trueOrFalse;
+        while($user = $resultado->fetch_assoc()){
+        if($correo === $user['correo'] && $clave === $user['clave']){
+            $trueOrFalse = 1;
+            }
+        else {$trueOrFalse = 0;}
+        }
+
+        if($trueOrFalse === 1){
+            session_start();
+            $_SESSION['permiso']  = 'administrador';
+            //session_destroy();
+            echo 'Bienvenido';
+        }
+
+        else {
+            echo 'No tienes permiso';
+        }
+    }
 }
 
 

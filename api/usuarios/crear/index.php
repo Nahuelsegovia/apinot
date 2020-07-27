@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "../../../vendor/autoload.php";
 use Bayfront\Utilities\HttpRequest\Request;
 require_once('../../../metodos.php');
@@ -9,8 +10,12 @@ $apellido = Request::getQuery('apellido');
 $correo = Request::getQuery('correo');
 $clave = Request::getQuery('clave');
 
-$nuevoUsuario = new Usuario($nombre, $apellido, $correo, $clave);
-$nuevoUsuario->crearUsuario();
+if(isset($_SESSION['permiso'])){
+    $nuevoUsuario = new Usuario($nombre, $apellido, $correo, $clave);
+    $nuevoUsuario->crearUsuario();
+}
 
-
+else {
+    echo 'No tienes permisos para crear usuarios';
+}
 ?>
