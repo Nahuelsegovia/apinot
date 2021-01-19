@@ -51,6 +51,6 @@ Para crear notas nos dirigimos a /api/notas/crear y a través de request envíam
 
 ## Autor
 
-(https://twitter.com/d0t__) – 
+Nahuel Segovia 
 
 Distribuido a través de Apache 2.0 ``http://www.apache.org/licenses/LICENSE-2.0.txt`` para más información.
